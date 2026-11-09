@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Souvenir — apprendre l'islam par petites cartes</title>
+<meta name="description" content="Micro-apprentissage islamique : une carte, une preuve, une action. Tawhîd, hadith, sîra, fiqh, mariage, éducation — par cartes courtes, avec les sources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080D17; --bg2:#0E1626; --card:#111C2F; --line:#22304A; --line2:#2E3F5E;
+  --txt:#E8ECF4; --mut:#93A0B8; --gold:#D4AF37; --gold2:#F0D67A; --green:#34d399; --red:#f87171;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,sans-serif;line-height:1.55;
+  background-image:radial-gradient(circle at 20% 0%, rgba(212,175,55,.10), transparent 45%),
+                   radial-gradient(circle at 85% 15%, rgba(52,211,153,.07), transparent 40%),
+                   linear-gradient(#0A1120, #080D17 60%);
+  background-attachment:fixed;min-height:100vh}
+a{color:var(--gold2);text-decoration:none}
+button{font-family:inherit}
+
+/* ---------- TOP ---------- */
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;padding:11px 20px;
+  background:rgba(8,13,23,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .mk{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-family:'Amiri',serif;
+  font-size:20px;color:#12203A;background:linear-gradient(150deg,var(--gold2),var(--gold));box-shadow:0 0 0 1px rgba(212,175,55,.5),0 6px 18px rgba(212,175,55,.22)}
+.brand h1{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;margin:0;letter-spacing:-.02em;font-weight:800}
+.brand small{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.spacer{flex:1}
+.hud{display:flex;align-items:center;gap:10px}
+.hud .pill{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--mut);
+  border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:rgba(17,28,47,.6)}
+.hud .pill b{color:var(--gold2);font-family:'Bricolage Grotesque',sans-serif;font-size:13px}
+.ring{width:34px;height:34px;flex:0 0 auto}
+.ring circle{fill:none;stroke-width:3.5}
+.ring .bgc{stroke:var(--line2)}
+.ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .4s;transform:rotate(-90deg);transform-origin:50% 50%}
+
+/* ---------- LAYOUT ---------- */
+main{max-width:1080px;margin:0 auto;padding:26px 20px 70px}
+.view{display:none}
+.view.on{display:block}
+
+/* ---------- HOME ---------- */
+.hero{padding:14px 0 26px}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#0F1B2E;background:linear-gradient(150deg,var(--gold2),var(--gold));padding:6px 12px;border-radius:999px}
+.hero h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,5vw,46px);line-height:1.02;letter-spacing:-.04em;margin:16px 0 0;font-weight:800}
+.hero h2 em{font-style:normal;color:var(--gold2)}
+.hero p{color:var(--mut);max-width:60ch;margin:14px 0 0;font-size:15.5px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{border:none;border-radius:12px;padding:13px 22px;font-weight:700;font-size:14.5px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;
+  transition:transform .12s,box-shadow .12s}
+.btn.gold{background:linear-gradient(150deg,var(--gold2),var(--gold));color:#12203A;box-shadow:0 8px 24px rgba(212,175,55,.25)}
+.btn.gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(212,175,55,.35)}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line2)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold2)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn small{font-weight:600;opacity:.75;font-size:12px}
+
+.sec-title{display:flex;align-items:baseline;gap:12px;margin:34px 0 14px}
+.sec-title h3{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;margin:0;letter-spacing:-.02em}
+.sec-title span{font-size:12.5px;color:var(--mut)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.stk{position:relative;background:linear-gradient(160deg,rgba(17,28,47,.95),rgba(14,22,38,.95));border:1px solid var(--line);
+  border-radius:16px;padding:17px 17px 15px;cursor:pointer;overflow:hidden;transition:transform .14s,border-color .14s,box-shadow .14s}
+.stk:hover{transform:translateY(-3px);border-color:var(--sc);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.stk::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--sc);opacity:.9}
+.stk .ar{font-family:'Amiri',serif;color:var(--sc);font-size:17px;opacity:.9;direction:rtl;line-height:1.2;padding-right:44px}
+.stk h4{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;margin:6px 0 0;letter-spacing:-.02em;font-weight:700;padding-right:34px}
+.stk p{font-size:12.5px;color:var(--mut);margin:7px 0 0;line-height:1.45;min-height:36px}
+.stk .ico{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:15px;
+  background:#DDE5F0;border:1px solid #B9C6DA;color:#12203A}
+.stk .bar{margin-top:12px;height:5px;border-radius:99px;background:#0B1424;overflow:hidden}
+.stk .bar i{display:block;height:100%;width:0;background:var(--sc);border-radius:99px;transition:width .4s}
+.stk .foot{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:7px;font-weight:600}
+.stk .foot b{color:var(--txt);font-weight:700}
+
+/* ---------- SESSION ---------- */
+.sessionbar{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.sessionbar .back{border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:10px;padding:8px 13px;cursor:pointer;font-size:13px;font-weight:600}
+.sessionbar .back:hover{color:var(--gold2);border-color:var(--gold)}
+.sessionbar .pos{font-size:12.5px;color:var(--mut);font-weight:600}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:8px;height:8px;border-radius:99px;background:var(--line2)}
+.dots i.ok{background:var(--green)}
+.dots i.ko{background:var(--red)}
+.dots i.cur{background:var(--gold);transform:scale(1.25)}
+
+.flash{position:relative;background:linear-gradient(170deg,#132036,#0E1829);border:1px solid var(--line2);border-radius:20px;
+  padding:30px 30px 26px;min-height:330px;display:flex;flex-direction:column;box-shadow:0 22px 60px rgba(0,0,0,.5);
+  overflow:hidden}
+.flash::after{content:"";position:absolute;inset:0;background-image:
+  repeating-linear-gradient(45deg, rgba(212,175,55,.045) 0 2px, transparent 2px 12px);pointer-events:none;opacity:.5}
+.flash .tag{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sc);border:1px solid var(--sc);border-radius:999px;padding:4px 10px;align-self:flex-start;opacity:.95}
+.flash .ttl{font-size:12.5px;color:var(--mut);margin:14px 0 0;font-weight:600;letter-spacing:.02em}
+.pb{font-family:'Amiri',serif;font-size:.92em;line-height:0;vertical-align:-.25em;margin:0 .12em;display:inline-block}
+.flash .q{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(20px,3.2vw,27px);line-height:1.28;letter-spacing:-.025em;margin:8px 0 0;font-weight:600;position:relative;z-index:1}
+.flash .reveal{margin-top:auto;padding-top:22px;position:relative;z-index:1}
+.ans{border-top:1px solid var(--line2);margin-top:20px;padding-top:18px;position:relative;z-index:1;animation:fade .28s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ans .txt{font-size:15.5px;line-height:1.62}
+.srcblock{display:flex;gap:10px;align-items:flex-start;margin-top:16px;padding:11px 13px;border-radius:11px;
+  background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.28)}
+.srcblock .ic{font-size:15px;line-height:1.3;font-weight:700;color:var(--gold)}
+.srcblock .lab{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block}
+.srcblock .val{font-size:13px;color:#EFE4C0;font-weight:600}
+.actblock{display:flex;gap:10px;align-items:flex-start;margin-top:10px;padding:11px 13px;border-radius:11px;
+  background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.25)}
+.actblock .lab{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:700;display:block}
+.actblock .val{font-size:13px;color:#D8F5E9}
+.grade{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.grade button{flex:1;min-width:150px;border-radius:13px;padding:14px;font-weight:700;font-size:14px;cursor:pointer;border:1px solid;transition:.13s}
+.grade .no{background:rgba(248,113,113,.09);border-color:rgba(248,113,113,.4);color:#FCA5A5}
+.grade .no:hover{background:rgba(248,113,113,.18)}
+.grade .yes{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.4);color:#6EE7B7}
+.grade .yes:hover{background:rgba(52,211,153,.2)}
+.hint{text-align:center;font-size:11.5px;color:#5C6B85;margin-top:12px}
+.hint kbd{background:#0B1424;border:1px solid var(--line2);border-radius:4px;padding:1px 5px;font-size:10.5px;font-family:inherit}
+
+/* ---------- FIN DE SESSION ---------- */
+.done{text-align:center;padding:40px 20px}
+.done .big{font-family:'Bricolage Grotesque',sans-serif;font-size:64px;line-height:1;color:var(--gold2);letter-spacing:-.04em}
+.done h3{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;margin:10px 0 0;letter-spacing:-.02em}
+.done p{color:var(--mut);margin:8px 0 22px;font-size:14.5px}
+
+/* ---------- STACK VIEW ---------- */
+.shead{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.shead .ar{font-family:'Amiri',serif;font-size:26px;color:var(--sc);direction:rtl}
+.shead h2{font-family:'Bricolage Grotesque',sans-serif;font-size:26px;margin:0;letter-spacing:-.03em}
+.shead .sub{font-size:12.5px;color:var(--mut);margin:2px 0 0;max-width:62ch}
+.list{display:flex;flex-direction:column;gap:9px}
+.row{display:flex;align-items:center;gap:13px;background:rgba(17,28,47,.7);border:1px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;transition:.13s}
+.row:hover{border-color:var(--sc);background:rgba(17,28,47,.95)}
+.row .dot{width:9px;height:9px;border-radius:99px;flex:0 0 auto;background:var(--line2)}
+.row .dot.new{background:var(--gold)}
+.row .dot.ok{background:var(--green)}
+.row .dot.ko{background:var(--red)}
+.row .t{font-weight:600;font-size:14px;flex:1}
+.row .s{font-size:11px;color:var(--mut);white-space:nowrap}
+
+/* ---------- FOOTER / MÉTHODE ---------- */
+.panel{margin-top:44px;border:1px solid var(--line);border-radius:18px;background:rgba(14,22,38,.6);overflow:hidden}
+.panel>header{padding:20px 24px 16px;border-bottom:1px solid var(--line)}
+.panel h3{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;margin:0 0 4px;letter-spacing:-.02em}
+.panel header p{margin:0;color:var(--mut);font-size:13.5px;max-width:76ch}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;padding:20px 24px 24px}
+.step{border-left:2px solid var(--gold);padding-left:13px}
+.step b{display:block;font-size:13.5px}
+.step span{font-size:12.5px;color:var(--mut)}
+.srclist{padding:18px 24px 24px;font-size:13px;color:var(--mut)}
+.srclist b{color:var(--txt)}
+footer{border-top:1px solid var(--line);padding:24px 20px 50px;color:#66748D;font-size:12px;text-align:center}
+
+@media(max-width:640px){
+  .flash{padding:22px 18px 20px;min-height:0}
+  .grid{grid-template-columns:1fr}
+  .hud .pill:first-child{display:none}
+  .brand small{display:none}
+  .grade button{min-width:0}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <div class="mk">ذ</div>
+    <div><h1>Souvenir<small>apprendre par cartes</small></h1></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="hud">
+    <div class="pill">Aujourd'hui <b id="hudToday">0</b>/5</div>
+    <div class="pill">Cartes vues <b id="hudKnown">0</b>/<span id="hudTotal">0</span></div>
+    <svg class="ring" viewBox="0 0 40 40"><circle class="bgc" cx="20" cy="20" r="16"></circle><circle class="fg" id="ringFg" cx="20" cy="20" r="16" stroke-dasharray="100.5" stroke-dashoffset="100.5"></circle></svg>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ ACCUEIL ============ -->
+<section class="view on" id="v-home">
+  <div class="hero">
+    <div class="kicker">Une carte, une preuve, une action</div>
+    <h2>Apprendre l'islam <em>par petites touches.</em></h2>
+    <p>Cinq cartes par jour, cinq minutes. Chaque carte porte une idée, sa <strong>preuve</strong> (verset ou hadith référencé) et une <strong>action</strong> à faire. Rien n'est demandé sans source.</p>
+    <div class="cta">
+      <button class="btn gold" id="startBtn">▶ Ma session du jour <small id="dueCount"></small></button>
+      <button class="btn ghost" id="allBtn">Parcourir les douze thèmes</button>
+    </div>
+  </div>
+
+  <div class="sec-title"><h3>Les douze thèmes</h3><span id="stackCount"></span></div>
+  <div class="grid" id="grid"></div>
+
+  <section class="panel">
+    <header>
+      <h3>La méthode — pourquoi des cartes</h3>
+      <p>Le principe est celui des applications de micro-apprentissage : on ne retient pas un livre, on retient des unités courtes, revues au bon moment. C'est aussi la logique de la sunna : la constance, pas la quantité.</p>
+    </header>
+    <div class="steps">
+      <div class="step"><b>1. Une carte à la fois</b><span>Une idée, une preuve. Le cerveau enregistre ce qui est court et clos.</span></div>
+      <div class="step"><b>2. On répond avant de voir</b><span>Formuler sa réponse, même mentalement, double la rétention.</span></div>
+      <div class="step"><b>3. On revoit à J+1, J+3, J+7</b><span>C'est l'espacement qui fixe, pas la relecture.</span></div>
+      <div class="step"><b>4. On agit une fois</b><span>Un savoir non pratiqué s'efface — et la science utile est celle qui se vit.</span></div>
+      <div class="step"><b>5. On revient demain</b><span>« Les actes les plus aimés d'Allah sont les plus constants, même s'ils sont peu. »</span></div>
+    </div>
+    <div class="srclist">
+      <b>Sources utilisées dans les cartes :</b> Le Coran (référence sourate:verset) · <i>Sahîh al-Bukhârî</i> · <i>Sahîh Muslim</i> · <i>Sunan</i> Abî Dâwûd · <i>Jâmi'</i> at-Tirmidhî · <i>Sunan</i> Ibn Mâja · <i>Musnad</i> Ahmad · <i>Al-Muwatta'</i> · <i>Al-Arba'în an-Nawawiyya</i> · <i>Riyâd as-Sâlihîn</i> · <i>Zâd al-Ma'âd</i> · <i>Madârij as-Sâlikîn</i> · <i>Al-'Aqîda al-Wâsitiyya</i> · <i>Al-Usûl ath-Thalâtha</i> · <i>Kitâb at-Tawhîd</i> · <i>Ma'ârij al-Qabûl</i> · <i>Ar-Rahîq al-Makhtûm</i> · <i>Subul al-Hudâ wa ar-Rashâd</i> · <i>Tafsîr</i> Ibn Kathîr.
+      <br><br>⚠️ <b>Un hadith n'est cité qu'avec son recueil.</b> Quand le numéro n'est pas certain, seul le recueil est indiqué — jamais un numéro inventé. Pour toute décision religieuse, revenez aux ouvrages et à votre professeur : une application ne remplace pas la science.
+    </div>
+  </section>
+</section>
+
+<!-- ============ SESSION ============ -->
+<section class="view" id="v-session">
+  <div class="sessionbar">
+    <button class="back" id="quitBtn">← Quitter</button>
+    <div class="pos" id="posTxt"></div>
+    <div class="dots" id="dots"></div>
+  </div>
+  <div id="cardZone"></div>
+  <div class="hint"><kbd>espace</kbd> retourner · <kbd>1</kbd> à revoir · <kbd>2</kbd> je sais</div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section class="view" id="v-stack">
+  <div class="sessionbar"><button class="back" id="backBtn">← Tous les thèmes</button></div>
+  <div class="shead" id="shead"></div>
+  <div class="list" id="list"></div>
+</section>
+
+</main>
+
+<footer>
+  Souvenir — cartes d'apprentissage islamique, méthode sunnite.<br>
+  Aucune donnée ne quitte cet appareil · Progression enregistrée dans le navigateur.<br>
+  <a href="https://hassanijacques-boop.github.io/tube/">← Les Tube</a> · Version 1 — 8 novembre 2026
+</footer>
+
+<script>
+const STACKS = [{"id":"tawhid","n":"Les trois fondements","ar":"الأُصُول الثَّلَاثَة","e":"🕌","c":"#D4AF37","d":"Al-Usûl ath-Thalâtha de Muhammad ibn 'Abd al-Wahhâb : qui est ton Seigneur, quelle est ta religion, qui est ton prophète."},{"id":"kitab","n":"Le livre du Tawhîd","ar":"كِتَاب التَّوْحِيد","e":"📕","c":"#E8C86A","d":"Les chapitres de Kitâb at-Tawhîd : ce qui annule l'unicité, et comment s'en préserver."},{"id":"hadiths","n":"Les 40 hadiths d'an-Nawawî","ar":"الأَرْبَعُون النَّوَاوِيَّة","e":"📜","c":"#34d399","d":"Quarante hadiths qui résument la religion : intention, piliers, halal et haram, caractère."},{"id":"sira","n":"La Sîra du Prophète","ar":"السِّيرَة النَّبَوِيَّة","e":"🌙","c":"#60a5fa","d":"De la naissance à la mort : les étapes qui changent la compréhension du message."},{"id":"prophetes","n":"Les prophètes","ar":"الأَنْبِيَاء","e":"🕊️","c":"#a78bfa","d":"Les 25 prophètes cités dans le Coran, et ce que chaque récit enseigne."},{"id":"savants","n":"Les savants","ar":"العُلَمَاء","e":"🖋️","c":"#fbbf24","d":"Ceux qui ont porté le savoir : les quatre imams, les muhaddithûn, les contemporains."},{"id":"tahara","n":"La purification","ar":"الطَّهَارَة","e":"💧","c":"#38bdf8","d":"Wudû', ghusl, tayammum : les conditions de validité de la prière."},{"id":"salat","n":"La prière","ar":"الصَّلَاة","e":"🕋","c":"#fb923c","d":"Conditions, piliers, obligations et sunan : ce sans quoi la prière ne vaut pas."},{"id":"mariage","n":"Mariage & famille","ar":"النِّكَاح","e":"💍","c":"#f472b6","d":"Contrat, droits et devoirs, vie commune : le foyer comme acte d'adoration."},{"id":"education","n":"Éducation des enfants","ar":"تَرْبِيَة الأَوْلَاد","e":"🌱","c":"#4ade80","d":"Ce que la sunna ordonne, dans quel ordre, et à quel âge."},{"id":"adhkar","n":"Adhkâr & du'â","ar":"الأَذْكَار","e":"📿","c":"#22d3ee","d":"Les invocations du quotidien, leur moment et leur sens."},{"id":"akhlaq","n":"Le caractère","ar":"الأَخْلَاق","e":"💛","c":"#facc15","d":"L'akhlâq du Prophète ﷺ : ce qui pèse le plus lourd dans la balance."}];
+const CARDS  = [{"id":"tawhid001","s":"tawhid","t":"Pourquoi Allah nous a-t-il créés ?","q":"Quel est le but de notre création, et quel verset le dit ?","a":"Allah nous a créés pour L'adorer, Lui seul. « Je n'ai créé les djinns et les hommes que pour qu'ils M'adorent. » L'adoration n'est pas un moyen d'aller mieux : c'est la fonction pour laquelle l'humain existe.","src":"Coran, 51:56","act":"Écrire cette phrase sur un papier et la relire avant chaque prière pendant 3 jours."},{"id":"tawhid002","s":"tawhid","t":"Les trois fondements","q":"Quels sont les trois fondements qu'Allah a imposés à tout être humain ?","a":"① La connaissance d'Allah ② la connaissance de l'islam ③ la connaissance du Prophète Muhammad ﷺ. Ce sont les trois questions auxquelles tout serviteur devra répondre.","src":"Al-Usûl ath-Thalâtha, Muhammad ibn 'Abd al-Wahhâb","act":"Réciter les trois de mémoire, sans regarder."},{"id":"tawhid003","s":"tawhid","t":"La première des obligations","q":"Quelle est la toute première obligation du musulman ?","a":"Le Tawhîd : savoir qu'Allah est unique, et Lui vouer l'adoration. Avant la prière, avant le jeûne : la connaissance de Celui qu'on adore.","src":"Al-Usûl ath-Thalâtha ; Coran, 47:19","act":"Nommer à voix haute les trois formes de tawhîd."},{"id":"tawhid004","s":"tawhid","t":"Les trois catégories du Tawhîd","q":"Quelles sont les trois catégories du Tawhîd ?","a":"① Ar-Rubûbiyya (Il crée, Il pourvoit, Il gère) ② Al-Ulûhiyya (Lui seul mérite l'adoration) ③ Al-Asmâ' wa-s-Sifât (Ses noms et attributs, sans altération). Les mécréants de La Mecque reconnaissaient la première et rejetaient la deuxième.","src":"Kitâb at-Tawhîd ; Al-'Aqîda al-Wâsitiyya, Ibn Taymiyya","act":"Écrire pour chaque catégorie un exemple concret de ma vie."},{"id":"tawhid005","s":"tawhid","t":"Pourquoi la Rubûbiyya ne suffit pas","q":"Suffit-il de croire qu'Allah a créé l'univers ?","a":"Non. Les Quraysh croyaient qu'Allah crée et pourvoit — et ils étaient pourtant polythéistes, parce qu'ils adoraient d'autres que Lui. Le combat du message porte sur l'adoration, pas sur la création.","src":"Coran, 29:61-63 ; Kitâb at-Tawhîd, chap. 1","act":"Repérer une chose que j'aime plus que je n'aime Allah, et la nommer."},{"id":"tawhid006","s":"tawhid","t":"Le sens de « Lâ ilâha illa Allâh »","q":"Que disent exactement les deux parties de la Chahâda ?","a":"« Lâ ilâha » nie toute divinité ; « illa Allâh » affirme qu'Allah seul est adoré. C'est une négation puis une affirmation : on vide le cœur des idoles, puis on y place Allah.","src":"Ma'ârij al-Qabûl, al-Hukamî","act":"Dire la phrase en séparant les deux temps, à voix lente."},{"id":"tawhid007","s":"tawhid","t":"Les sept conditions de la Chahâda","q":"Cite les sept conditions de « Lâ ilâha illa Allâh ».","a":"Le savoir, la certitude, l'acceptation, la soumission, la sincérité, la véracité, l'amour — et le rejet de tout ce qui est adoré en dehors d'Allah.","src":"Ma'ârij al-Qabûl, al-Hukamî","act":"En choisir une et vérifier honnêtement si elle est présente chez moi."},{"id":"tawhid008","s":"tawhid","t":"Le shirk, définition","q":"Qu'est-ce que le shirk, et pourquoi est-ce le plus grand des péchés ?","a":"C'est donner à autre qu'Allah une part d'adoration. C'est le seul péché qu'Allah ne pardonne pas s'il n'y a pas de repentir : « Allah ne pardonne pas qu'on Lui associe quoi que ce soit, mais Il pardonne ce qui est moindre. »","src":"Coran, 4:48","act":"Lister trois formes de shirk subtil (ostentation, peur, espérance)."},{"id":"tawhid009","s":"tawhid","t":"Le shirk mineur","q":"Qu'est-ce que le shirk mineur, et comment le reconnaître ?","a":"Tout acte d'adoration mêlé d'ostentation : prier pour être vu, donner pour être loué. Le Prophète ﷺ a dit : « Ce que je crains le plus pour vous, c'est le shirk mineur » — on lui demanda : et qu'est-ce ? Il dit : « l'ostentation ».","src":"Musnad Ahmad ; rapporté aussi par al-Bukhârî dans al-Adab al-Mufrad","act":"Avant un acte de bien, vérifier : pour qui est-ce que je le fais ?"},{"id":"tawhid010","s":"tawhid","t":"L'ihsân","q":"Que veut dire l'ihsân, et quel hadith le définit ?","a":"« Adorer Allah comme si tu Le voyais, car si tu ne Le vois pas, Lui te voit. » C'est le troisième degré : après l'islam et l'iman, l'ihsân est la qualité du regard intérieur.","src":"Sahîh Muslim, n° 8 (hadith Jibrîl)","act":"Prier une fois aujourd'hui en pensant consciemment qu'Allah me voit."},{"id":"tawhid011","s":"tawhid","t":"Les six piliers de la foi","q":"Quels sont les six piliers de l'iman ?","a":"Croire en Allah, en Ses anges, en Ses livres, en Ses messagers, au Jour dernier, et au décret — le bon et le mauvais.","src":"Sahîh Muslim, n° 8","act":"Écrire le pilier qui me pose le plus de difficulté et chercher pourquoi."},{"id":"tawhid012","s":"tawhid","t":"Les cinq piliers de l'islam","q":"Quels sont les cinq piliers de l'islam ?","a":"La Chahâda, la prière, la zakât, le jeûne du Ramadan, le pèlerinage — pour celui qui en a les moyens.","src":"Sahîh al-Bukhârî, n° 8 ; Sahîh Muslim, n° 16","act":"Vérifier lequel est le plus fragile chez moi en ce moment."},{"id":"tawhid013","s":"tawhid","t":"Le pacte de la fitra","q":"Quel est le verset qui parle du pacte originel ?","a":"« Et quand ton Seigneur tira des reins des fils d'Adam leur descendance, et les fit témoigner contre eux-mêmes : ne suis-je pas votre Seigneur ? Ils dirent : si, nous en témoignons. »","src":"Coran, 7:172","act":"Se rappeler ce pacte une fois dans la journée, avant un choix difficile."},{"id":"tawhid014","s":"tawhid","t":"La hijra intérieure","q":"Que signifie la hijra dans le hadith « l'émigré est celui qui fuit ce qu'Allah a interdit » ?","a":"Que le vrai déplacement n'est pas géographique : c'est quitter ce qu'Allah a interdit. On peut être immobile et avoir fait sa hijra.","src":"Sahîh al-Bukhârî, n° 10","act":"Choisir une chose interdite dont je m'éloigne aujourd'hui, concrètement."},{"id":"tawhid015","s":"tawhid","t":"Le tawakkul n'est pas la passivité","q":"Le tawakkul dispense-t-il d'agir ?","a":"Non. Le Prophète ﷺ a dit à celui qui laissait sa monture sans l'attacher : « Attache-la, puis place ta confiance en Allah. » Confiance dans le résultat, effort sur les moyens.","src":"Jâmi' at-Tirmidhî, n° 2517 (hasan)","act":"Nommer l'action que je remets à demain « en attendant Allah »."},{"id":"kitab016","s":"kitab","t":"Le droit d'Allah sur Ses serviteurs","q":"Quel est le droit d'Allah sur les serviteurs, et le droit des serviteurs sur Allah ?","a":"« Le droit d'Allah sur les serviteurs : qu'ils L'adorent sans rien Lui associer. Le droit des serviteurs sur Allah : qu'Il ne châtie pas celui qui ne Lui associe rien. »","src":"Sahîh al-Bukhârî, n° 2856 ; Sahîh Muslim, n° 30","act":"Réciter les deux moitiés du hadith de mémoire."},{"id":"kitab017","s":"kitab","t":"L'invocation des morts","q":"Pourquoi invoquer un mort est-il une porte du shirk ?","a":"Parce que le du'â est une adoration. Le Prophète ﷺ a dit : « L'invocation, c'est l'adoration. » On ne l'adresse qu'à Allah, vivant, entendant, puissant.","src":"Jâmi' at-Tirmidhî, n° 3372 ; Coran, 40:60","act":"Vérifier à qui j'adresse mes demandes, même intérieurement."},{"id":"kitab018","s":"kitab","t":"La peur du shirk","q":"Pourquoi Ibrahim lui-même craignait-il le shirk ?","a":"Il dit : « Et éloigne-moi, ainsi que mes fils, de l'adoration des idoles. » Si l'ami d'Allah craint pour lui-même, personne n'est à l'abri — la sécurité n'est pas une prétention, c'est une demande.","src":"Coran, 14:35 ; Kitâb at-Tawhîd, chap. sur la peur du shirk","act":"Faire du'â pour être préservé du shirk, matin et soir."},{"id":"kitab019","s":"kitab","t":"La confiance dans les causes","q":"La croyance aux causes est-elle permise ?","a":"Oui, à condition de ne pas s'y attacher : les causes ne produisent rien par elles-mêmes. Le Prophète ﷺ a interdit de dire « ce que Allah et untel ont voulu », et a enseigné « ce qu'Allah a voulu, puis ce qu'untel a voulu ».","src":"Sunan Abî Dâwûd, n° 4980","act":"Repérer dans mes phrases le « si » qui donne le pouvoir à autre qu'Allah."},{"id":"kitab020","s":"kitab","t":"Le talisman","q":"Peut-on porter un objet « protecteur » (amulette, grigri) ?","a":"Non. Le Prophète ﷺ a dit : « Celui qui porte une amulette a commis du shirk. » L'objet ne protège pas : c'est Allah qui protège, et l'attacher au cou est une croyance, pas un geste anodin.","src":"Musnad Ahmad, n° 17422 ; jugé sahîh par al-Albânî","act":"Regarder ce que je porte ou garde « pour la chance »."},{"id":"kitab021","s":"kitab","t":"La sorcellerie","q":"Pourquoi la sorcellerie est-elle de la mécréance ?","a":"Parce qu'elle prétend agir sur le destin par un pouvoir autre que celui d'Allah, et qu'elle passe par l'invocation des djinns. C'est l'un des sept péchés destructeurs.","src":"Coran, 2:102 ; Sahîh al-Bukhârî, n° 2766","act":"Ne pas consulter de voyant, même « pour rire »."},{"id":"kitab022","s":"kitab","t":"Le jugement par autre qu'Allah","q":"Que dit le Coran de celui qui juge par autre chose que ce qu'Allah a révélé ?","a":"Le verset dit de ceux qui ne jugent pas selon ce qu'Allah a révélé qu'ils sont les mécréants, les injustes, les pervers — selon les versets et selon l'objet du jugement.","src":"Coran, 5:44-47","act":"Vérifier à qui je demande de trancher mes conflits."},{"id":"kitab023","s":"kitab","t":"L'amour, condition du tawhîd","q":"Quel est le signe de l'amour véritable d'Allah ?","a":"Suivre le Prophète ﷺ. « Dis : si vous aimez Allah, suivez-moi, Allah vous aimera. » L'amour se prouve par la conformité, pas par l'émotion.","src":"Coran, 3:31","act":"Choisir une sunna simple que je ne pratique pas encore, et la faire aujourd'hui."},{"id":"kitab024","s":"kitab","t":"La crainte et l'espérance","q":"Comment équilibrer la crainte et l'espérance ?","a":"Les salaf disaient : « Celui qui adore Allah par l'amour seul est un zindîq, par la crainte seule est un hâribî, par l'espérance seule est un murjî. Le croyant réunit les trois. »","src":"Rapporté par Ibn al-Qayyim, Madârij as-Sâlikîn","act":"Écrire ce qui domine chez moi : peur, espoir ou amour."},{"id":"kitab025","s":"kitab","t":"Le droit du voisin","q":"Quel est le droit du voisin en islam ?","a":"Le Prophète ﷺ a dit : « Il n'est pas croyant, celui qui passe la nuit rassasié alors que son voisin a faim. » Le droit du voisin est un droit réel, pas une politesse.","src":"Al-Adab al-Mufrad, al-Bukhârî, n° 112 ; Musnad Ahmad","act":"Vérifier si je sais ce qu'il y a dans l'assiette de mon voisin."},{"id":"kitab026","s":"kitab","t":"L'ordre de la da'wa","q":"Par quoi commence l'appel à l'islam ?","a":"Par le tawhîd. Le Prophète ﷺ a dit à Mu'âdh, envoyé au Yémen : « Que la première chose à laquelle tu les appelles soit qu'ils n'adorent qu'Allah. »","src":"Sahîh al-Bukhârî, n° 4347 ; Sahîh Muslim, n° 19","act":"Corriger une idée fausse chez un proche, avec douceur, sur l'unicité."},{"id":"kitab027","s":"kitab","t":"L'adoration du cœur","q":"Quelles adorations se font uniquement par le cœur ?","a":"La peur, l'espoir, l'amour, la confiance, l'humilité, le désir. Ces mouvements intérieurs sont des adorations : les diriger vers autre qu'Allah, c'est du shirk.","src":"Kitâb at-Tawhîd ; Ibn al-Qayyim, Madârij as-Sâlikîn","act":"Nommer trois personnes dont l'avis pèse plus que celui d'Allah dans mes choix."},{"id":"hadiths028","s":"hadiths","t":"Les actes et l'intention","q":"Quelle est la valeur d'un acte sans intention ?","a":"« Les actes ne valent que par les intentions, et chacun n'a que ce qu'il a intentionné. » Le même geste peut être une adoration ou une habitude : c'est l'intention qui tranche.","src":"Sahîh al-Bukhârî, n° 1 ; Sahîh Muslim, n° 1907","act":"Avant une action aujourd'hui, formuler l'intention en une phrase."},{"id":"hadiths029","s":"hadiths","t":"L'islam, l'iman, l'ihsân","q":"Quels sont les trois degrés de la religion ?","a":"L'islam (les cinq actes), l'iman (les six croyances), l'ihsân (l'adoration consciente de la présence d'Allah). Le hadith de Jibrîl les réunit en une seule réponse.","src":"Sahîh Muslim, n° 8","act":"Me situer honnêtement sur les trois degrés."},{"id":"hadiths030","s":"hadiths","t":"Le halal et le haram sont clairs","q":"Que dit le hadith du licite et de l'illicite « évidents » ?","a":"« Le licite est évident, l'illicite est évident, et entre les deux il y a des choses douteuses. Celui qui se préserve du doute préserve sa religion et son honneur. »","src":"Sahîh al-Bukhârî, n° 52 ; Sahîh Muslim, n° 1599","act":"Identifier un doute concret dans mes revenus ou mes habitudes."},{"id":"hadiths031","s":"hadiths","t":"La religion est le conseil sincère","q":"Que veut dire « la religion, c'est le nasîha » ?","a":"Que la religion est un conseil sincère envers Allah, Son Livre, Son Messager, les musulmans et leurs dirigeants — pas un jugement des autres, mais une loyauté active.","src":"Sahîh Muslim, n° 55","act":"Donner un conseil utile aujourd'hui, sans humilier."},{"id":"hadiths032","s":"hadiths","t":"Le croyant aime pour son frère","q":"Quel est le signe de la foi complète selon ce hadith ?","a":"« Nul d'entre vous ne croit vraiment jusqu'à ce qu'il aime pour son frère ce qu'il aime pour lui-même. » Le critère est la jalousie : ce qu'on ne souhaite pas aux autres révèle ce qu'on a dans le cœur.","src":"Sahîh al-Bukhârî, n° 13 ; Sahîh Muslim, n° 45","act":"Faire du'â pour un proche ce que je demande pour moi."},{"id":"hadiths033","s":"hadiths","t":"Ce qui est douteux","q":"Comment gérer une situation dont je ne connais pas le statut ?","a":"La règle prophétique : « Laisse ce qui te fait douter pour ce qui ne te fait pas douter. » La tranquillité du cœur est un critère, pas une faiblesse.","src":"Jâmi' at-Tirmidhî, n° 2518 ; Musnad Ahmad","act":"Choisir aujourd'hui la version qui me met en paix, même plus exigeante."},{"id":"hadiths034","s":"hadiths","t":"La foi et la colère","q":"Le fort est-il celui qui gagne le combat ?","a":"Non : « Le fort n'est pas celui qui terrasse les autres, mais celui qui se maîtrise quand il est en colère. » La force est une retenue, pas une démonstration.","src":"Sahîh al-Bukhârî, n° 6114 ; Sahîh Muslim, n° 2609","act":"Ressentir la colère aujourd'hui et ne pas répondre pendant 10 secondes."},{"id":"hadiths035","s":"hadiths","t":"Allah regarde les cœurs","q":"Que regarde Allah dans nos actes ?","a":"« Allah ne regarde pas votre apparence ni vos corps, mais Il regarde vos cœurs et vos actes. » Ni la taille du geste, ni son apparence : le cœur et la conformité.","src":"Sahîh Muslim, n° 2564","act":"Faire un petit acte aujourd'hui sans que personne ne le sache."},{"id":"hadiths036","s":"hadiths","t":"Le droit du voisin","q":"Quel hadith établit le droit du voisin ?","a":"« Il n'est pas croyant celui qui se rassasie alors que son voisin a faim. » La foi est liée à la faim de l'autre, pas à mes sensations.","src":"Al-Adab al-Mufrad, n° 112","act":"Offrir quelque chose de simple à un voisin cette semaine."},{"id":"hadiths037","s":"hadiths","t":"Le meilleur des hommes","q":"Qui est le meilleur selon le Prophète ﷺ ?","a":"« Le meilleur d'entre vous est celui qui apprend le Coran et l'enseigne. » La supériorité est dans le savoir transmis, jamais dans la position.","src":"Sahîh al-Bukhârî, n° 5027","act":"Enseigner à quelqu'un une seule chose que je sais."},{"id":"hadiths038","s":"hadiths","t":"La propreté","q":"Quelle est la place de la propreté dans la foi ?","a":"« La purification est la moitié de la foi. » Elle n'est pas un détail esthétique : c'est la condition extérieure d'un acte intérieur.","src":"Sahîh Muslim, n° 223","act":"Vérifier aujourd'hui la propreté de mes vêtements pour la prière."},{"id":"hadiths039","s":"hadiths","t":"Le rire du Prophète ﷺ","q":"Comment le Prophète ﷺ riait-il ?","a":"Il souriait beaucoup et riait sans excès, la bouche entrouverte. La joie n'est pas contraire à la religion : l'excès et la moquerie le sont.","src":"Sahîh al-Bukhârî, n° 6092 (rires et sourires, chap.)","act":"Sourire aujourd'hui à quelqu'un avec qui j'ai un différend."},{"id":"sira040","s":"sira","t":"La naissance","q":"Quand et où le Prophète ﷺ est-il né ?","a":"À La Mecque, en l'an de l'Éléphant (vers 570), un lundi. Son père 'Abdullâh était mort avant sa naissance ; il perd sa mère à six ans.","src":"Ar-Rahîq al-Makhtûm ; Ibn Kathîr, Al-Bidâya wa-n-Nihâya","act":"Retenir : naissance 570, révélation à 40 ans, hijra 622."},{"id":"sira041","s":"sira","t":"Le début de la révélation","q":"Comment la révélation a-t-elle commencé ?","a":"À 40 ans, dans la grotte de Hirâ, Jibrîl vient et dit : « Lis ! » Il répond : « Je ne sais pas lire. » Le premier verset descendu : « Lis au nom de ton Seigneur qui a créé. »","src":"Coran, 96:1-5 ; Sahîh al-Bukhârî, n° 3","act":"Lire le passage 96:1-5 en français, lentement."},{"id":"sira042","s":"sira","t":"Les trois ans silencieux","q":"Combien de temps la prédication a-t-elle été secrète ?","a":"Environ trois ans, avant l'ordre d'avertir publiquement : « Lève-toi et avertis ! »","src":"Coran, 74:1-7 ; Ar-Rahîq al-Makhtûm","act":"Comprendre pourquoi on commence par les proches avant le public."},{"id":"sira043","s":"sira","t":"La première réaction de Quraysh","q":"Qu'ont reproché les Quraysh en premier lieu ?","a":"Non pas le jeûne ni la prière, mais l'unicité : ils soupçonnaient qu'il parlait mal de leurs idoles et divisait le clan. La première opposition porte toujours sur le tawhîd.","src":"Coran, 38:4-5 ; Ar-Rahîq al-Makhtûm","act":"Comparer avec mon propre entourage : où est la vraie résistance ?"},{"id":"sira044","s":"sira","t":"L'Aqaba et les Ansâr","q":"Quel événement a préparé l'émigration vers Médine ?","a":"Les serments d'al-'Aqaba, par lesquels les gens de Médine s'engagent à défendre le Prophète ﷺ — puis la hijra en 622.","src":"Ar-Rahîq al-Makhtûm ; Ibn Hishâm, Sîra","act":"Situer la hijra : an 1 de l'Hégire, 622."},{"id":"sira045","s":"sira","t":"La hijra","q":"Où le Prophète ﷺ s'est-il réfugié en quittant La Mecque ?","a":"Dans la grotte de Thawr, avec Abû Bakr. Abû Bakr s'inquiète, il répond : « Ne t'afflige pas, Allah est avec nous. »","src":"Coran, 9:40 ; Sahîh al-Bukhârî, n° 3653","act":"Relire le verset 9:40 et le retenir."},{"id":"sira046","s":"sira","t":"La construction de la mosquée","q":"Quelle est la première décision à Médine ?","a":"Construire la mosquée — centre de culte, d'enseignement et de décision. Puis la fraternisation entre émigrés et Ansâr.","src":"Ar-Rahîq al-Makhtûm","act":"Observer : quelle place tient la mosquée dans ma semaine ?"},{"id":"sira047","s":"sira","t":"Badr","q":"Que s'est-il passé à Badr, et en quelle année ?","a":"En l'an 2 H, la première grande bataille : 313 musulmans face à un millier de Quraysh. La victoire est attribuée à Allah seul : « Allah vous a secourus à Badr alors que vous étiez méprisés. »","src":"Coran, 3:123 ; Ar-Rahîq al-Makhtûm","act":"Retenir le chiffre : 313 contre ~1000, an 2 H."},{"id":"sira048","s":"sira","t":"Uhud","q":"Quelle leçon vient de la défaite partielle d'Uhud ?","a":"En l'an 3 H, les archers quittent leurs postes pour le butin, et la ligne se retourne. La leçon : la discipline collective est un ordre, et l'épreuve suit la victoire.","src":"Coran, 3:152-153 ; Ar-Rahîq al-Makhtûm","act":"Identifier une règle que j'abandonne quand le profit apparaît."},{"id":"sira049","s":"sira","t":"Al-Hudaybiyya","q":"Pourquoi le traité d'al-Hudaybiyya est-il appelé une « victoire éclatante » ?","a":"En l'an 6 H, les musulmans acceptent des conditions en apparence défavorables, et le calme qui suit permet à la prédication de s'étendre. « Nous t'avons accordé une victoire éclatante. »","src":"Coran, 48:1 ; Ar-Rahîq al-Makhtûm","act":"Retenir : une paix imparfaite peut valoir plus qu'une victoire d'orgueil."},{"id":"sira050","s":"sira","t":"La conquête de La Mecque","q":"Comment le Prophète ﷺ entre-t-il à La Mecque en l'an 8 H ?","a":"Sans vengeance de masse : « Allez, vous êtes libres. » Il pardonne à ceux qui l'ont chassé et humilié. La victoire sert à effacer, pas à écraser.","src":"Ar-Rahîq al-Makhtûm ; Ibn Hishâm","act":"Nommer une personne que je dois pardonner cette semaine."},{"id":"sira051","s":"sira","t":"Le pèlerinage d'adieu","q":"Que dit le Prophète ﷺ dans son dernier sermon ?","a":"Il rappelle le caractère sacré du sang, des biens et de l'honneur, l'égalité entre les humains, le droit des femmes, et qu'il laisse deux choses : le Livre d'Allah et sa Sunna.","src":"Ar-Rahîq al-Makhtûm ; Sahîh Muslim, n° 1218","act":"Relire l'idée d'égalité : elle est proclamée avant d'être comprise."},{"id":"sira052","s":"sira","t":"La mort du Prophète ﷺ","q":"Quand et à quel âge le Prophète ﷺ est-il mort ?","a":"En l'an 11 H (632), à Médine, à 63 ans, un lundi. Il est enterré dans la chambre de 'Â'isha.","src":"Ar-Rahîq al-Makhtûm ; Sahîh al-Bukhârî","act":"Retenir les repères : 570, 610, 622, 632."},{"id":"sira053","s":"sira","t":"Son caractère","q":"Que dit 'Â'isha du caractère du Prophète ﷺ ?","a":"« Son caractère était le Coran. » Il ne récitait pas seulement le Livre : il l'incarnait au point qu'on pouvait le décrire en le lisant.","src":"Sahîh Muslim, n° 746 ; Ahmad","act":"Lire une sourate en cherchant le comportement qu'elle décrit."},{"id":"prophetes054","s":"prophetes","t":"Le premier prophète","q":"Qui est le premier prophète, et sa première épreuve ?","a":"Âdam, créé puis installé au Paradis avec Hawwâ'. Après la faute, il ne nie pas : il reconnaît et demande pardon. « Seigneur, nous avons été injustes envers nous-mêmes. »","src":"Coran, 7:23 ; 2:37","act":"Retenir : le modèle d'Âdam est le repentir, pas l'excuse."},{"id":"prophetes055","s":"prophetes","t":"Nûh et l'appel long","q":"Combien de temps Nûh a-t-il appelé son peuple ?","a":"950 ans selon le Coran — et peu l'ont suivi. La leçon : le résultat n'appartient pas au prédicateur, la constance lui appartient.","src":"Coran, 29:14 ; 71:1-28","act":"Penser à une action juste que j'ai abandonnée trop vite."},{"id":"prophetes056","s":"prophetes","t":"Ibrâhîm et les idoles","q":"Comment Ibrâhîm a-t-il démontré la faiblesse des idoles ?","a":"Il brise les idoles sauf la plus grande, pour forcer son peuple à réfléchir : une idole incapable de se défendre ne peut rien pour vous.","src":"Coran, 21:51-67","act":"Nommer une « idole » moderne qui ne peut rien me donner."},{"id":"prophetes057","s":"prophetes","t":"Ibrâhîm et le feu","q":"Que dit Allah au feu qui entoure Ibrâhîm ?","a":"« Ô feu, sois fraîcheur et paix sur Ibrâhîm. » La protection vient d'Allah, pas de la force du serviteur.","src":"Coran, 21:69","act":"Retenir l'image : le feu perd sa nature par l'ordre d'Allah."},{"id":"prophetes058","s":"prophetes","t":"Le sacrifice","q":"Quel acte d'Ibrâhîm est commémoré chaque année ?","a":"Sa disposition à sacrifier son fils, remplacé par un bélier. La leçon : ce qui compte n'est pas la perte, mais l'obéissance.","src":"Coran, 37:99-107","act":"Écrire une chose que je dois « remettre » symboliquement."},{"id":"prophetes059","s":"prophetes","t":"Mûsâ et Pharaon","q":"Quelle est la demande de Mûsâ quand Allah l'envoie à Pharaon ?","a":"« Seigneur, élargis ma poitrine, facilite ma tâche, dénoue ma langue. » L'envoyé demande des moyens spirituels avant des moyens matériels.","src":"Coran, 20:25-28","act":"Réciter cette du'â avant une tâche difficile."},{"id":"prophetes060","s":"prophetes","t":"Mûsâ et le khadir","q":"Quelle leçon sort du récit de Mûsâ et du serviteur d'Allah ?","a":"Que l'on ne comprend pas toujours la sagesse d'un événement sur le moment. Ce qui semble une injustice peut être une protection.","src":"Coran, 18:60-82","act":"Repenser à une épreuve passée dont j'ai compris le sens plus tard."},{"id":"prophetes061","s":"prophetes","t":"'Îsâ","q":"Que dit le Coran de 'Îsâ ?","a":"Il est un serviteur et un prophète, né sans père par un miracle d'Allah, qui parlait au berceau et guérissait par la permission d'Allah. Il n'est ni dieu ni fils de dieu.","src":"Coran, 3:45-59 ; 19:16-36","act":"Retenir : prophète, pas divinité."},{"id":"prophetes062","s":"prophetes","t":"Yûsuf","q":"Quelle est la phrase de Yûsuf après l'épreuve ?","a":"« Il n'y a pas de reproche contre vous aujourd'hui. » Après la trahison de ses frères, il choisit le pardon avant la justice qu'il pouvait exercer.","src":"Coran, 12:92","act":"Pardonner une petite chose aujourd'hui, explicitement."},{"id":"prophetes063","s":"prophetes","t":"Ayyûb","q":"Comment Ayyûb a-t-il réagi à la maladie ?","a":"Il ne s'est pas plaint d'Allah : il s'est plaint à Allah. « Le mal m'a touché, et Tu es le plus miséricordieux. » La plainte à Allah n'est pas la plainte d'Allah.","src":"Coran, 21:83 ; 38:41-44","act":"Distinguer dans ma plainte : à qui je m'adresse ?"},{"id":"prophetes064","s":"prophetes","t":"Le sceau des prophètes","q":"Quel est le statut de Muhammad ﷺ parmi les prophètes ?","a":"Il est le dernier : « Muhammad n'est le père d'aucun de vos hommes, mais il est le Messager d'Allah et le sceau des prophètes. » Aucun prophète après lui.","src":"Coran, 33:40","act":"Retenir : la prophétie est close, la porte de l'innovation est fermée."},{"id":"prophetes065","s":"prophetes","t":"Le nombre de prophètes","q":"Combien de prophètes le Coran nomme-t-il ?","a":"Vingt-cinq sont nommés, parmi les 124 000 évoqués par la sunna. Ceux qui sont nommés sont des repères, pas la totalité.","src":"Coran, 6:83-86 ; 4:163","act":"En citer au moins dix de mémoire."},{"id":"savants066","s":"savants","t":"Abû Hanîfa","q":"Qui est Abû Hanîfa et quelle est sa particularité ?","a":"Fondateur de l'école hanafite, à Kûfa (80-150 H). Maître du raisonnement analogique (qiyâs) et de la jurisprudence, il refusait les fonctions officielles du pouvoir.","src":"Târîkh Baghdâd ; Ibn 'Abd al-Barr, Al-Intiqâ'","act":"Retenir sa ville : Kûfa."},{"id":"savants067","s":"savants","t":"Mâlik ibn Anas","q":"Quel livre a fondé l'école malikite ?","a":"Al-Muwatta', compilé à Médine (93-179 H). Il y réunit hadiths et pratiques des gens de Médine — la Constitution médinoise du fiqh.","src":"Al-Muwatta' ; Ibn 'Abd al-Barr","act":"Retenir : Médine, al-Muwatta'."},{"id":"savants068","s":"savants","t":"Ash-Shâfi'î","q":"Quelle est la contribution majeure d'ash-Shâfi'î ?","a":"La science des fondements du droit (usûl al-fiqh) avec Ar-Risâla : il fixe les règles d'extraction du droit à partir du Coran, de la sunna, du consensus et de l'analogie. Mort en 204 H.","src":"Ar-Risâla ; Ibn Kathîr","act":"Retenir les quatre sources qu'il hiérarchise."},{"id":"savants069","s":"savants","t":"Ahmad ibn Hanbal","q":"Pourquoi Ahmad est-il un symbole de résistance ?","a":"Il a refusé la thèse officielle du pouvoir califal sur la création du Coran, et a subi la prison et les coups (164-241 H). Il n'a pas plié pour une faveur.","src":"Ibn Kathîr, Al-Bidâya wa-n-Nihâya ; Târîkh Baghdâd","act":"Nommer une position que je tiens même sous pression."},{"id":"savants070","s":"savants","t":"Al-Bukhârî","q":"Que représente le Sahîh d'al-Bukhârî ?","a":"Le recueil de hadiths le plus rigoureux : il y sélectionne ses hadiths parmi des centaines de milliers entendus, avec des chaînes vérifiées. Mort en 256 H.","src":"Sahîh al-Bukhârî ; Târîkh Baghdâd","act":"Retenir : 256 H, le principe de la chaîne vérifiée."},{"id":"savants071","s":"savants","t":"Muslim","q":"Quelle est la singularité du Sahîh de Muslim ?","a":"Il regroupe les différentes versions d'un même hadith sous un seul chapitre, ce qui facilite la comparaison des chaînes. Mort en 261 H.","src":"Sahîh Muslim","act":"Retenir : Muslim = les variantes réunies."},{"id":"savants072","s":"savants","t":"An-Nawawî","q":"Que doit-on à an-Nawawî ?","a":"Les Quarante hadiths, Riyâd as-Sâlihîn et le commentaire de Sahîh Muslim : il rend la sunna utilisable par les non-spécialistes. De Damas, mort en 676 H.","src":"Al-Arba'în an-Nawawiyya ; Riyâd as-Sâlihîn","act":"Lire un hadith des 40 avec son commentaire."},{"id":"savants073","s":"savants","t":"Ibn Taymiyya","q":"Quel est le cœur de la pensée d'Ibn Taymiyya ?","a":"Faire remonter la religion aux textes et au sens des salaf, et refuser les ajouts. Il a écrit sur le tawhîd, la raison et la révélation. Mort en prison à Damas en 728 H.","src":"Al-'Aqîda al-Wâsitiyya ; Dar' Ta'ârud al-'Aql wa-n-Naql","act":"Retenir : la primauté du texte sur la coutume."},{"id":"savants074","s":"savants","t":"Ibn al-Qayyim","q":"Quel est l'apport d'Ibn al-Qayyim ?","a":"Élève d'Ibn Taymiyya, il décrit la foi de l'intérieur : Zâd al-Ma'âd sur la sîra et les adorations, Madârij as-Sâlikîn sur le cœur. Mort en 751 H.","src":"Zâd al-Ma'âd ; Madârij as-Sâlikîn","act":"Lire une page de Zâd al-Ma'âd sur la prière."},{"id":"savants075","s":"savants","t":"Ibn Kathîr","q":"Quel est l'apport principal d'Ibn Kathîr ?","a":"Son Tafsîr, qui rassemble les explications des salaf verset par verset, et sa chronique Al-Bidâya wa-n-Nihâya. Mort en 774 H.","src":"Tafsîr Ibn Kathîr","act":"Lire son commentaire d'un verset court."},{"id":"savants076","s":"savants","t":"Muhammad ibn 'Abd al-Wahhâb","q":"Quels livres a écrit Muhammad ibn 'Abd al-Wahhâb ?","a":"Al-Usûl ath-Thalâtha, Kitâb at-Tawhîd et Nawâqid al-Islâm : des traités courts qui exposent l'unicité par les textes. Mort en 1206 H.","src":"Al-Usûl ath-Thalâtha ; Kitâb at-Tawhîd","act":"Retenir : trois courts traités, pas une doctrine à part."},{"id":"savants077","s":"savants","t":"Al-Albânî","q":"Que doit-on à al-Albânî ?","a":"Le travail d'authentification des hadiths : il a trié le sahîh du faible dans les recueils, et rendu au public l'accès à la valeur réelle des traditions. Mort en 1999.","src":"Silsilat al-Ahâdîth as-Sahîha ; ses annotations","act":"Retenir : vérifier avant de transmettre."},{"id":"savants078","s":"savants","t":"Ibn Bâz et Ibn 'Uthaymîn","q":"Quel rôle ont joué Ibn Bâz et Ibn 'Uthaymîn ?","a":"Ils ont enseigné et commenté les traités de tawhîd pour le grand public : leurs sharh d'al-Usûl ath-Thalâtha et de Kitâb at-Tawhîd sont les portes d'entrée les plus lisibles.","src":"Sharh al-Usûl ath-Thalâtha ; Sharh Kitâb at-Tawhîd","act":"Choisir un sharh et lire l'explication d'un chapitre."},{"id":"tahara079","s":"tahara","t":"La purification, moitié de la foi","q":"Pourquoi la purification est-elle une condition de la prière ?","a":"Parce que la prière est un face-à-face : on ne s'y présente pas en état d'impureté. Le Prophète ﷺ a dit : « Allah n'accepte pas la prière de celui qui est en état d'impureté jusqu'à ce qu'il se purifie. »","src":"Sahîh al-Bukhârî, n° 135 ; Sahîh Muslim, n° 224","act":"Vérifier l'état de mes ablutions avant chaque prière aujourd'hui."},{"id":"tahara080","s":"tahara","t":"Les obligations du wudû'","q":"Quelles parties sont obligatoires dans les ablutions ?","a":"Le visage, les deux mains jusqu'aux coudes, la tête, les deux pieds jusqu'aux chevilles — dans cet ordre, selon le verset.","src":"Coran, 5:6","act":"Faire le wudû' en nommant chaque partie à voix basse."},{"id":"tahara081","s":"tahara","t":"Ce qui annule le wudû'","q":"Qu'est-ce qui annule les ablutions ?","a":"Tout ce qui sort des deux voies, le sommeil profond, et la perte de conscience. La base : le hadith « rien ne sort de lui sans qu'il refasse ses ablutions ».","src":"Sahîh al-Bukhârî, n° 135 ; Abû Dâwûd","act":"Identifier ce qui m'arrive le plus souvent et y prêter attention."},{"id":"tahara082","s":"tahara","t":"Le ghusl","q":"Quand le ghusl est-il obligatoire ?","a":"Après la relation conjugale, après la fin des menstrues et des lochies, et à l'émission de liquide séminal. Sans ghusl, ni prière ni jeûne ne sont valables.","src":"Coran, 4:43 ; 5:6 ; Sahîh Muslim, n° 315","act":"Retenir : 4 causes, pas de liste approximative."},{"id":"tahara083","s":"tahara","t":"Le tayammum","q":"Dans quel cas fait-on le tayammum ?","a":"En l'absence d'eau ou en cas de maladie : on frappe les mains sur une surface pure et on s'essuie le visage et les mains. C'est une facilité légiférée, pas un raccourci.","src":"Coran, 4:43 ; 5:6","act":"Mémoriser les gestes, pour pouvoir les faire sans hésiter."},{"id":"tahara084","s":"tahara","t":"Les khuffayn","q":"Quelle est la durée du mas-h sur les chaussettes de cuir ?","a":"Un jour et une nuit pour le résident, trois jours et trois nuits pour le voyageur, à compter du premier mas-h après les ablutions.","src":"Sahîh Muslim, n° 276","act":"Retenir les deux durées."},{"id":"tahara085","s":"tahara","t":"Les ablutions avant le sommeil","q":"Que gagne-t-on à faire ses ablutions avant de dormir ?","a":"Le Prophète ﷺ a enseigné de faire le wudû' avant de se coucher, puis de se coucher sur le côté droit, puis de faire du'â — celui qui meurt cette nuit meurt sur la fitra.","src":"Sahîh al-Bukhârî, n° 6311 ; Muslim","act":"Faire le wudû' ce soir avant de dormir."},{"id":"tahara086","s":"tahara","t":"Le siwâk","q":"Quelle est la place du siwâk ?","a":"« Si je ne craignais de charger ma communauté, j'aurais ordonné le siwâk à chaque prière. » La propreté de la bouche prépare à la parole de la prière.","src":"Sahîh al-Bukhârî, n° 887 ; Muslim, n° 252","act":"Brosser les dents avant la prière de l'aube."},{"id":"tahara087","s":"tahara","t":"Les grandes ablutions du vendredi","q":"Le ghusl du vendredi est-il obligatoire ?","a":"Il est fortement recommandé (ou obligatoire selon certains savants pour les circonstances décrites dans le hadith), et le Prophète ﷺ l'a lié au jour du rassemblement.","src":"Sahîh al-Bukhârî, n° 877 ; Muslim, n° 846","act":"Le prendre soin vendredi avant la prière."},{"id":"salat088","s":"salat","t":"La première chose dont on rendra compte","q":"Quel acte est jugé en premier au Jour dernier ?","a":"La prière. « La première chose dont le serviteur rendra compte le Jour de la Résurrection, c'est sa prière. » Si elle est bonne, le reste suit.","src":"Jâmi' at-Tirmidhî, n° 413 ; Sunan an-Nasâ'î","act":"Vérifier mes cinq prières pendant trois jours, sans les enchaîner."},{"id":"salat089","s":"salat","t":"Les cinq prières","q":"Quelles sont les cinq prières et leurs horaires ?","a":"Al-Fajr (aube), adh-Dhuhr (après le zénith), al-'Asr (après-midi), al-Maghrib (coucher), al-'Ishâ' (nuit). Chacune a une fenêtre qui se ferme.","src":"Coran, 17:78 ; Sahîh Muslim, n° 612","act":"Écrire mes horaires de prière pour cette semaine et les afficher."},{"id":"salat090","s":"salat","t":"Les piliers de la prière","q":"Quels sont les piliers (arkân) de la prière ?","a":"La station debout, la takbîra d'entrée, la récitation d'al-Fâtiha, l'inclinaison, le redressement, la prosternation, l'assise entre les deux, la salutation finale, et l'ordre.","src":"Sahîh al-Bukhârî, n° 793 (hadith du mendiant)","act":"Refaire une prière en vérifiant un pilier à la fois."},{"id":"salat091","s":"salat","t":"Le takbîr et l'intention","q":"La prière commence par quoi ?","a":"Par la takbîra « Allâhu akbar », avec l'intention formulée dans le cœur — jamais à voix haute. Le takbîr rend le monde extérieur silencieux.","src":"Sahîh al-Bukhârî, n° 1 ; Sunan at-Tirmidhî","act":"Prier une fois en disant le takbîr très lentement."},{"id":"salat092","s":"salat","t":"La Fatiha","q":"Pourquoi al-Fâtiha est-elle obligatoire dans chaque unité ?","a":"« Celui qui ne récite pas la Fâtiha n'a pas de prière. » C'est le dialogue : la moitié pour Allah, la moitié pour le serviteur.","src":"Sahîh al-Bukhârî, n° 756 ; Sahîh Muslim, n° 394","act":"Réciter la Fâtiha une fois en regardant le sens de chaque verset."},{"id":"salat093","s":"salat","t":"La prière dans le temps","q":"Que faire si je manque une prière ?","a":"On la rattrape dès qu'on se souvient ou qu'on se réveille : « Celui qui oublie une prière ou dort par-dessus, son expiation est de la prier quand il s'en souvient. »","src":"Sahîh Muslim, n° 684","act":"Vérifier : combien de prières ai-je manquées cette semaine ?"},{"id":"salat094","s":"salat","t":"Les sunan de la prière","q":"Quelle différence entre pilier et sunna dans la prière ?","a":"Le pilier manquant rend la prière invalide et doit être rattrapé ; la sunna manquante n'invalide pas mais coûte des points, et se compense par la prosternation d'oubli.","src":"Al-Majmû' an-Nawawî ; Ibn 'Uthaymîn, ash-Sharh al-Mumti'","act":"Demander à quelqu'un de vérifier si je fais bien la prosternation d'oubli."},{"id":"salat095","s":"salat","t":"La concentration","q":"Que faire de l'« oubli » de ce qu'on dit pendant la prière ?","a":"Le Prophète ﷺ a recommandé de ne pas se disputer avec soi-même : on a dit « la prière est un moment d'humilité ». La solution est de ralentir, pas de se reprocher.","src":"Coran, 23:1-2 ; Sahîh Muslim, n° 2202","act":"Prier une fois deux fois plus lentement que d'habitude."},{"id":"salat096","s":"salat","t":"La prière du Vendredi","q":"Quel est le statut du vendredi ?","a":"La prière du Jumu'a remplace adh-Dhuhr pour les hommes libres résidents, avec la khutba : le Prophète ﷺ a dit que celui qui la déserte trois fois sans excuse voit son cœur scellé.","src":"Sahîh Muslim, n° 865 ; Abû Dâwûd, n° 1052","act":"Arriver tôt vendredi et écouter la khutba sans téléphone."},{"id":"salat097","s":"salat","t":"Les raisons d'être dispensé de la prière","q":"Qui est dispensé de la prière en communauté ?","a":"La femme en état de menstrues pour sa prière, le malade, etc. — les dispenses sont prévues par le texte, jamais décidées par soi-même.","src":"Sahîh al-Bukhârî, n° 331 ; Muslim, n° 335","act":"Ne pas inventer une dispense sans source."},{"id":"mariage098","s":"mariage","t":"Le mariage est une sunna","q":"Quel est le statut du mariage dans la religion ?","a":"C'est une sunna des prophètes : « Le mariage fait partie de ma sunna ; celui qui ne suit pas ma sunna n'est pas des miens. » Il est un contrat et un acte d'adoration, pas un simple arrangement social.","src":"Sunan Ibn Mâja, n° 1846 (jugé sahîh par al-Albânî)","act":"Relire les finalités du mariage : sérénité (sakîna), descendance, chasteté."},{"id":"mariage099","s":"mariage","t":"Les conditions du contrat","q":"Quelles sont les conditions de validité du mariage ?","a":"Le consentement des deux époux, le tuteur (walî) pour la femme, deux témoins justes, et l'absence de tout empêchement légal (parenté, allaitement, religion pour la femme musulmane).","src":"Coran, 4:22-24 ; Ibn 'Uthaymîn, ash-Sharh al-Mumti'","act":"Vérifier, pour un mariage proche, que les conditions sont réunies."},{"id":"mariage100","s":"mariage","t":"Le mahr","q":"Qu'est-ce que le mahr, et qui le fixe ?","a":"C'est le don obligatoire offert par le mari à l'épouse, dont elle dispose librement. Il n'a pas de plafond, et le réduire à une formalité le vide de son sens.","src":"Coran, 4:4 ; 4:24","act":"Comprendre : le mahr appartient à la femme, pas à sa famille."},{"id":"mariage101","s":"mariage","t":"Le choix du conjoint","q":"Que recommandait le Prophète ﷺ dans le choix d'une épouse ?","a":"« Choisissez pour votre religion » — la femme est épousée pour quatre raisons : ses biens, sa noblesse, sa beauté et sa religion ; privilégie celle qui a la religion.","src":"Sahîh al-Bukhârî, n° 5090 ; Sahîh Muslim, n° 1466","act":"Lister les trois critères que je regarde en premier chez un conjoint."},{"id":"mariage102","s":"mariage","t":"La bénédiction du mariage","q":"Quelle est la formule de félicitation ?","a":"« Bârakallâhu laka, wa bâraka 'alayka, wa jama'a baynakumâ fî khayr » — qu'Allah te bénisse, bénissez en lui, et vous réunisse dans le bien.","src":"Sunan Abî Dâwûd, n° 2130 ; at-Tirmidhî","act":"Mémoriser la formule et l'utiliser à un mariage."},{"id":"mariage103","s":"mariage","t":"Le bon traitement","q":"Quel hadith établit le critère du bon mari ?","a":"« Le meilleur d'entre vous est le meilleur envers sa famille, et je suis le meilleur d'entre vous envers ma famille. » Le critère se mesure à la maison, pas dehors.","src":"Jâmi' at-Tirmidhî, n° 3895 (hasan sahîh)","act":"Demander à mon épouse un point concret à améliorer."},{"id":"mariage104","s":"mariage","t":"La consultation mutuelle","q":"Que dit le Coran de la prise de décision dans le couple ?","a":"« Et délibérez entre vous de bonne manière. » La décision se partage : la consultation (shûrâ) fait partie de la vie du foyer.","src":"Coran, 65:6 ; 2:233","act":"Prendre une décision familiale en demandant l'avis de l'autre avant."},{"id":"mariage105","s":"mariage","t":"L'écoute et la parole douce","q":"Que dit le Prophète ﷺ du fait de parler à sa femme ?","a":"Il restait à l'écoute, plaisantait et prenait soin : « Rien n'a été pesé de plus lourd que le bon caractère. » La douceur dans le langage est une adoration.","src":"Jâmi' at-Tirmidhî, n° 2003","act":"Dire aujourd'hui une parole douce à mon épouse, sans raison."},{"id":"mariage106","s":"mariage","t":"Le conseil entre époux","q":"Comment corriger un défaut chez son conjoint ?","a":"Par la douceur, à huis clos, sans humilier : le Prophète ﷺ a enseigné l'usage du « si je te conseille c'est par amour ». La correction publique est une violence.","src":"Sahîh Muslim, n° 2593 ; Riyâd as-Sâlihîn, chap. de la douceur","act":"Corriger une chose à la maison, calmement, sans reproche."},{"id":"mariage107","s":"mariage","t":"L'équilibre entre les droits","q":"Les droits du mari et de la femme sont-ils identiques ?","a":"Ils sont réciproques mais pas identiques : le mari assure la dépense (nafaqa), la femme garde ses biens ; chacun a des obligations propres. « Les femmes ont des droits équivalents à leurs obligations, conformément à ce qui est convenable. »","src":"Coran, 2:228 ; 4:34","act":"Lister mes obligations concrètes dans le foyer."},{"id":"education108","s":"education","t":"Le premier enseignement","q":"Qu'enseigner en priorité à un enfant ?","a":"La base du tawhîd : « Ô mon fils, ne fais pas d'associé à Allah. » Avant la prière, avant les détails, avant la mémorisation : d'abord à qui l'on appartient.","src":"Coran, 31:13 ; Al-Usûl ath-Thalâtha","act":"Expliquer à un enfant « qui est Allah » avec ses mots."},{"id":"education109","s":"education","t":"L'ordre de la prière","q":"À quel âge ordonne-t-on la prière à l'enfant ?","a":"À sept ans on l'y ordonne, à dix ans on l'y contraint avec douceur si nécessaire. Le Prophète ﷺ a établi cette progression.","src":"Sunan Abî Dâwûd, n° 495 ; Ahmed","act":"Vérifier l'âge de mes enfants et adapter mon exigence."},{"id":"education110","s":"education","t":"L'exemple avant la parole","q":"Pourquoi l'exemple est-il plus efficace que le discours ?","a":"Parce que l'enfant apprend par imitation. Le Prophète ﷺ faisait précéder l'ordre par l'exemple, et le Coran dit : « Vous êtes pour les gens un modèle. »","src":"Coran, 2:44 ; Sahîh al-Bukhârî","act":"Faire une prière devant mes enfants sans rien commenter."},{"id":"education111","s":"education","t":"L'équité entre les enfants","q":"Que dit le Prophète ﷺ du cadeau fait à un seul enfant ?","a":"Il a refusé qu'un père donne un cadeau à un seul enfant sans les autres : « Craignez Allah et soyez justes entre vos enfants. » L'injustice entre enfants laisse des traces longues.","src":"Sahîh al-Bukhârî, n° 2587 ; Muslim, n° 1623","act":"Vérifier si mes cadeaux ou attentions sont équilibrés."},{"id":"education112","s":"education","t":"Le jeu","q":"Le jeu est-il contraire à l'éducation ?","a":"Non : le Prophète ﷺ a autorisé et encouragé le jeu et la course avec les enfants. Le divertissement encadré fait partie de l'équilibre, comme le temps de l'étude.","src":"Sunan Abî Dâwûd ; Ar-Rahîq al-Makhtûm","act":"Jouer 15 minutes avec un enfant aujourd'hui, sans écran."},{"id":"education113","s":"education","t":"La responsabilité du parent","q":"Quelle est la responsabilité du parent ?","a":"« Chacun de vous est un berger et responsable de son troupeau. » Le parent ne répond pas seulement de la scolarité : il répond de l'âme qui lui est confiée.","src":"Sahîh al-Bukhârî, n° 893 ; Sahîh Muslim, n° 1829","act":"Écrire une chose que je délègue alors que je devrais la porter."},{"id":"education114","s":"education","t":"La douceur","q":"Que change la douceur dans l'éducation ?","a":"Le Prophète ﷺ a dit : « La douceur n'est jamais dans une chose sans l'embellir, et n'est jamais retirée d'une chose sans l'enlaidir. » La dureté obtient l'obéissance, jamais l'amour du bien.","src":"Sahîh Muslim, n° 2594","act":"Remplacer une fois la réprimande par une explication."},{"id":"education115","s":"education","t":"Le choix des amis","q":"Pourquoi surveiller les amis d'un enfant ?","a":"Parce que l'ami façonne le comportement : « L'homme suit la religion de son ami, que chacun regarde qui il fréquente. » Ce n'est pas de la méfiance, c'est de la protection.","src":"Sunan Abî Dâwûd, n° 4833 ; at-Tirmidhî","act":"Connaître le nom des amis de mes enfants cette semaine."},{"id":"adhkar116","s":"adhkar","t":"L'invocation est l'adoration","q":"Quel hadith donne au du'â son statut ?","a":"« L'invocation, c'est l'adoration. » Le Prophète ﷺ désigne le du'â comme l'acte même par lequel on reconnaît Allah — pas un supplément facultatif.","src":"Jâmi' at-Tirmidhî, n° 3372 ; Coran, 40:60","act":"Faire une du'â aujourd'hui, sans demander de bien matériel."},{"id":"adhkar117","s":"adhkar","t":"Allah est proche","q":"Que dit le Coran de la proximité d'Allah ?","a":"« Et quand Mes serviteurs t'interrogent sur Moi, Je suis tout proche : Je réponds à l'appel de celui qui M'appelle. » Pas d'intermédiaire nécessaire.","src":"Coran, 2:186","act":"Adresser une du'â à voix basse, comme une conversation."},{"id":"adhkar118","s":"adhkar","t":"L'invocation du matin","q":"Quelle invocation ouvrir la journée ?","a":"« Allâhumma bika asbahnâ, wa bika amsaynâ, wa bika nahyâ, wa bika namût » — c'est par Toi que nous atteignons le matin, le soir, la vie et la mort.","src":"Jâmi' at-Tirmidhî, n° 3391 (hasan)","act":"La dire demain matin, avant le téléphone."},{"id":"adhkar119","s":"adhkar","t":"Le dhikr du soir","q":"Pourquoi faire un dhikr le soir ?","a":"Pour clore la journée en conscience : « Souvenez-vous de Moi, Je Me souviendrai de vous. » Le souvenir n'est pas un rituel vide, c'est un lien maintenu.","src":"Coran, 2:152 ; Riyâd as-Sâlihîn, chap. du dhikr","act":"Poser un rappel à 20 h pour le dhikr du soir."},{"id":"adhkar120","s":"adhkar","t":"L'istighfâr","q":"Que fait l'istighfâr dans une vie ?","a":"Il efface et ouvre : « Demandez pardon à Allah, Il vous enverra du ciel des pluies abondantes. » Le pardon ne concerne pas que l'au-delà : il répare aussi ici-bas.","src":"Coran, 71:10-12 ; 11:3","act":"Dire 100 istighfâr aujourd'hui, en comptant."},{"id":"adhkar121","s":"adhkar","t":"La du'â du voyage","q":"Que dit-on en montant dans un véhicule ?","a":"« Subhâna alladhî sakhkhara lanâ hâdhâ wa mâ kunnâ lahu muqrinîn » — gloire à Celui qui nous l'a soumis, alors que nous n'aurions pu le maîtriser.","src":"Coran, 43:13-14","act":"La réciter au prochain trajet, à voix audible."},{"id":"adhkar122","s":"adhkar","t":"Les deux rak'ât de la consultation","q":"Que fait-on quand on doit prendre une décision ?","a":"La prière de la consultation (istikhâra) : deux rak'ât puis la du'â enseignée, en demandant à Allah de rendre possible ce qui est bon et d'écarter ce qui ne l'est pas.","src":"Sahîh al-Bukhârî, n° 1166 ; Musnad Ahmad","act":"L'apprendre avant de l'utiliser, pour ne pas la improviser."},{"id":"adhkar123","s":"adhkar","t":"La du'â pour les parents","q":"Quelle du'â fait-on pour ses parents ?","a":"« Rabbi-rhamhumâ kamâ rabbayânî saghîrâ » — Seigneur, fais-leur miséricorde comme ils m'ont élevé enfant.","src":"Coran, 17:24","act":"La dire aujourd'hui pour son père et sa mère, en citant leurs prénoms."},{"id":"akhlaq124","s":"akhlaq","t":"Ce qui pèse le plus lourd","q":"Quel acte pèsera le plus lourd dans la balance ?","a":"Le bon caractère. Quand on demanda au Prophète ﷺ ce qui fait entrer le plus de gens au Paradis, il répondit : « la crainte d'Allah et le bon caractère ».","src":"Jâmi' at-Tirmidhî, n° 2004","act":"Choisir une qualité à améliorer et la travailler une semaine."},{"id":"akhlaq125","s":"akhlaq","t":"La bonté envers les parents","q":"Quel est le rang des parents dans l'islam ?","a":"Après Allah, l'obéissance aux parents est citée immédiatement : « Et ton Seigneur a décrété que vous n'adoriez que Lui, et la bonté envers les parents. »","src":"Coran, 17:23-24 ; Sahîh al-Bukhârî, n° 5971","act":"Appeler ses parents aujourd'hui, sans autre motif."},{"id":"akhlaq126","s":"akhlaq","t":"Le silence","q":"Quel conseil le Prophète ﷺ donne-t-il sur la parole ?","a":"« Que celui qui croit en Allah et au Jour dernier dise du bien ou se taise. » Le silence n'est pas une faiblesse : c'est une maîtrise.","src":"Sahîh al-Bukhârî, n° 6018 ; Muslim, n° 47","act":"S'abstenir aujourd'hui d'un commentaire inutile."},{"id":"akhlaq127","s":"akhlaq","t":"La mauvaise langue","q":"Qu'est-ce que la ghiba, et pourquoi est-ce si grave ?","a":"Parler de quelqu'un en son absence de ce qu'il déteste. Le Prophète ﷺ a comparé cela à manger la chair de son frère mort, selon l'image du Coran.","src":"Coran, 49:12 ; Sahîh Muslim, n° 2589","act":"Interrompre une conversation qui médit aujourd'hui."},{"id":"akhlaq128","s":"akhlaq","t":"L'honnêteté","q":"Que dit le Prophète ﷺ du mensonge ?","a":"« Le mensonge ne peut être une croyance : le mensonge conduit à la perversité, et la perversité au Feu. » L'honnêteté est une pratique quotidienne, pas une qualité abstraite.","src":"Sahîh al-Bukhârî, n° 6094 ; Muslim, n° 2607","act":"Ne pas arrondir la vérité dans une seule phrase aujourd'hui."},{"id":"akhlaq129","s":"akhlaq","t":"La patience","q":"Que dit le Coran de la sabr ?","a":"« Allah est avec les patients. » La patience n'est pas la résignation, c'est la tenue de l'âme dans l'épreuve et l'action juste qui l'accompagne.","src":"Coran, 2:153 ; Riyâd as-Sâlihîn","act":"Nommer ce qui m'énerve et décider d'une réponse patiente."},{"id":"akhlaq130","s":"akhlaq","t":"L'envie","q":"L'envie est-elle interdite ?","a":"Oui, elle ronge les œuvres comme le feu le bois. Seule exception : envier sans souhaiter la disparition du bien d'autrui, c'est la concurrence dans le bien (ghibta).","src":"Sunan Abî Dâwûd, n° 4903 ; Sahîh al-Bukhârî, n° 5025","act":"Repérer une personne que j'envie et faire du'â pour elle."},{"id":"akhlaq131","s":"akhlaq","t":"La miséricorde","q":"Qui obtient la miséricorde d'Allah ?","a":"Les miséricordieux : « Faites miséricorde à ceux qui sont sur terre, Celui qui est au ciel vous fera miséricorde. » La miséricorde se pratique d'abord dans le concret.","src":"Sunan Abî Dâwûd, n° 4941 ; Jâmi' at-Tirmidhî, n° 1924","act":"Faire une chose miséricordieuse aujourd'hui, même minuscule."}];
+const DAY = 86400000;
+const $ = s => document.querySelector(s);
+
+/* ---------- état persistant ---------- */
+const KEY = "savoir_v1";
+let db = JSON.parse(localStorage.getItem(KEY) || '{"st":{},"jour":{},"total":0}');
+if(!db.st) db.st = {};
+if(!db.jour) db.jour = {};
+const save = () => localStorage.setItem(KEY, JSON.stringify(db));
+const today = () => new Date().toISOString().slice(0,10);
+const now = () => Date.now();
+
+function statut(id){ return db.st[id] || null; }
+function isKnown(id){ const s = db.st[id]; return !!s && s.b >= 2; }
+function isDue(id){
+  const s = db.st[id];
+  if(!s) return true;
+  return (s.next || 0) <= now();
+}
+function dueCards(){ return CARDS.filter(c => isDue(c.id)); }
+function newCount(){ return CARDS.filter(c => !db.st[c.id]).length; }
+function seenCount(){ return CARDS.filter(c => !!db.st[c.id]).length; }
+function knownCount(){ return seenCount(); }
+
+/* ---------- rendu accueil ---------- */
+function ringUpdate(){
+  const p = Math.round(100 * knownCount() / CARDS.length);
+  const C = 2 * Math.PI * 16;
+  $("#ringFg").setAttribute("stroke-dasharray", C.toFixed(1));
+  $("#ringFg").setAttribute("stroke-dashoffset", (C * (1 - p/100)).toFixed(1));
+}
+function renderHome(){
+  $("#hudTotal").textContent = CARDS.length;
+  $("#hudKnown").textContent = knownCount();
+  $("#hudToday").textContent = db.jour[today()] || 0;
+  ringUpdate();
+  const due = dueCards().length;
+  $("#dueCount").textContent = due ? "· "+due+" à revoir" : "· tout est à jour";
+  $("#stackCount").textContent = STACKS.length + " thèmes · " + CARDS.length + " cartes";
+  const g = $("#grid"); g.innerHTML = "";
+  STACKS.forEach(s => {
+    const cs = CARDS.filter(c => c.s === s.id);
+    const kn = cs.filter(c => isKnown(c.id)).length;
+    const pct = cs.length ? Math.round(100*kn/cs.length) : 0;
+    const el = document.createElement("div");
+    el.className = "stk"; el.style.setProperty("--sc", s.c);
+    el.innerHTML =
+      '<div class="ico">'+s.e+'</div>'+
+      '<div class="ar">'+s.ar+'</div>'+
+      '<h4>'+s.n+'</h4>'+
+      '<p>'+s.d+'</p>'+
+      '<div class="bar"><i style="width:'+pct+'%"></i></div>'+
+      '<div class="foot"><span><b>'+cs.length+'</b> cartes</span><span>'+kn+' sues</span></div>';
+    el.onclick = () => openStack(s.id);
+    g.appendChild(el);
+  });
+}
+
+/* ---------- session ---------- */
+let session = {file:[], i:0, res:[], revealed:false};
+
+function buildSession(){
+  const due = dueCards().sort((a,b) => (db.st[a.id]?.next||0) - (db.st[b.id]?.next||0));
+  const news = CARDS.filter(c => !db.st[c.id]);
+  let file = due.slice(0,5);
+  if(file.length < 5) file = file.concat(news.slice(0, 5-file.length));
+  if(file.length === 0) file = CARDS.slice().sort(()=>Math.random()-.5).slice(0,5);
+  return file;
+}
+function startSession(){
+  if((db.jour[today()]||0) >= 5 && dueCards().length === 0){
+    session.file = CARDS.filter(c=>!isKnown(c.id)).slice(0,5);
+    if(!session.file.length) session.file = CARDS.slice().sort(()=>Math.random()-.5).slice(0,5);
+  } else {
+    session.file = buildSession();
+  }
+  session.i = 0; session.res = []; session.revealed = false;
+  show("v-session"); renderCard();
+}
+function renderDots(){
+  const d = $("#dots"); d.innerHTML = "";
+  session.file.forEach((c,i) => {
+    const el = document.createElement("i");
+    if(i < session.res.length) el.className = session.res[i] ? "ok" : "ko";
+    else if(i === session.i) el.className = "cur";
+    d.appendChild(el);
+  });
+}
+function renderCard(){
+  const zone = $("#cardZone");
+  if(session.i >= session.file.length) return renderDone();
+  const c = session.file[session.i];
+  const s = STACKS.find(x => x.id === c.s);
+  const tw = t => t.replace(/\uFDFA/g, '<span class="pb">\uFDFA</span>');
+  $("#posTxt").textContent = "Carte " + (session.i+1) + " / " + session.file.length;
+  renderDots();
+  zone.innerHTML =
+    '<div class="flash" style="--sc:'+s.c+'">'+
+      '<span class="tag">'+s.n+'</span>'+
+      
+      '<div class="q">'+tw(c.q)+'</div>'+
+      '<div class="reveal" id="revZone">'+
+        '<button class="btn gold" id="revealBtn" style="width:100%;justify-content:center">Voir la réponse</button>'+
+      '</div>'+
+    '</div>';
+  $("#revealBtn").onclick = reveal;
+}
+function reveal(){
+  const c = session.file[session.i];
+  const s = STACKS.find(x => x.id === c.s);
+  $("#revZone").innerHTML =
+    '<div class="ans">'+
+      '<div class="txt">'+tw(c.a)+'</div>'+
+      '<div class="srcblock"><div class="ic">§</div><div><span class="lab">Preuve</span><span class="val">'+c.src+'</span></div></div>'+
+      (c.act ? '<div class="actblock"><div class="ic">→</div><div><span class="lab">À faire</span><span class="val">'+c.act+'</span></div></div>' : '')+
+    '</div>'+
+    '<div class="grade">'+
+      '<button class="no" id="gNo">À revoir</button>'+
+      '<button class="yes" id="gYes">Je sais</button>'+
+    '</div>';
+  $("#gNo").onclick = () => grade(false);
+  $("#gYes").onclick = () => grade(true);
+}
+function grade(ok){
+  const c = session.file[session.i];
+  const prev = db.st[c.id] || {b:0, next:0};
+  let b = ok ? Math.min(3, (prev.b||0)+1) : 1;
+  const delays = [0, 1, 3, 7];
+  db.st[c.id] = {b, next: now() + delays[b]*DAY, last: now()};
+  db.total = (db.total||0)+1;
+  const t = today(); db.jour[t] = (db.jour[t]||0)+1;
+  save();
+  session.res.push(ok);
+  session.i++;
+  if(session.i >= session.file.length) renderDone(); else renderCard();
+  $("#hudToday").textContent = db.jour[today()] || 0;
+  $("#hudKnown").textContent = knownCount();
+  ringUpdate();
+}
+function renderDone(){
+  const ok = session.res.filter(Boolean).length;
+  const ko = session.res.length - ok;
+  $("#posTxt").textContent = "Session terminée";
+  renderDots();
+  $("#cardZone").innerHTML =
+    '<div class="flash" style="--sc:var(--gold)"><div class="done">'+
+      '<div class="big">'+ok+'/'+session.res.length+'</div>'+
+      '<h3>Session terminée</h3>'+
+      '<p>'+ok+' carte'+(ok>1?'s':'')+' sue'+(ok>1?'s':'')+' · '+ko+' à revoir demain.'+
+      '<br>Reviens demain : c\'est la répétition espacée qui fait tenir le savoir.</p>'+
+      '<button class="btn gold" id="againBtn" style="margin:0 auto">Retour aux thèmes</button>'+
+    '</div></div>';
+  $("#againBtn").onclick = () => { show("v-home"); renderHome(); };
+}
+
+/* ---------- stack ---------- */
+function openStack(id){
+  const s = STACKS.find(x => x.id === id);
+  const cs = CARDS.filter(c => c.s === id);
+  $("#shead").innerHTML = '<div><div class="ar">'+s.ar+'</div></div><div style="flex:1"><h2>'+s.n+'</h2><p class="sub">'+s.d+'</p></div>';
+  const l = $("#list"); l.innerHTML = "";
+  cs.forEach(c => {
+    const st = db.st[c.id];
+    const cls = !st ? "new" : (st.b >= 2 ? "ok" : "ko");
+    const lab = !st ? "nouvelle" : (st.b >= 2 ? "sue · J+"+Math.max(0,Math.ceil((st.next-now())/DAY)) : "à revoir");
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = '<span class="dot '+cls+'"></span><span class="t">'+c.t+'</span><span class="s">'+lab+'</span>';
+    row.onclick = () => {
+      session.file = [c]; session.i = 0; session.res = [];
+      show("v-session"); renderCard();
+    };
+    l.appendChild(row);
+  });
+  show("v-stack");
+}
+
+/* ---------- navigation ---------- */
+function show(id){
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === id));
+  window.scrollTo({top:0,behavior:"instant"});
+}
+$("#startBtn").onclick = startSession;
+$("#allBtn").onclick = () => { document.querySelector(".sec-title").scrollIntoView({behavior:"smooth"}); };
+$("#quitBtn").onclick = () => { show("v-home"); renderHome(); };
+$("#backBtn").onclick = () => { show("v-home"); renderHome(); };
+
+document.addEventListener("keydown", e => {
+  if(!$("#v-session").classList.contains("on")) return;
+  if(e.key === " " || e.key === "Enter"){ e.preventDefault(); if($("#revealBtn")) reveal(); }
+  if(e.key === "1" && $("#gNo")) grade(false);
+  if(e.key === "2" && $("#gYes")) grade(true);
+});
+
+/* ---------- init ---------- */
+renderHome();
+</script>
+</body>
+</html>
